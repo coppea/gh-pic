@@ -51,32 +51,10 @@
 - [x] i18n（中文简体、中文繁体、英文）
 - [x] 工具箱（[图片压缩](https://picx-docs.xpoet.cn/usage-guide/toolbox.html#%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9)、[图片转 Base64](https://picx-docs.xpoet.cn/usage-guide/toolbox.html#%E5%9B%BE%E7%89%87%E8%BD%AC-base64)、[图片水印](https://picx-docs.xpoet.cn/usage-guide/toolbox.html#%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0)）
 
-## 贡献 | Contribution
 
-欢迎各种形式的贡献，包括但不限于：美化界面、增加功能、性能优化、修复 Bug、完善文档等。
-
-参与贡献必读：[PicX 贡献指南](https://picx-docs.xpoet.cn/contribution-guide/contribution-guide.html)
-
-### 致谢
-
-这个项目的存在多亏了所有的贡献者，在此表示感谢。
-
-<a href="https://github.com/XPoet/picx/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=XPoet/picx" />
-</a>
 
 ##  反馈 | Feedback
 
 在使用过程中，如遇问题，请仔细阅读 **[官方文档](https://picx-docs.xpoet.cn)**，或在 GitHub 发起 **[Issue](https://github.com/XPoet/picx/issues)**。
 
-## 赞赏 | Appreciation
 
-PicX 的更新迭代依靠作者工作之外的时间，维护不易，如果对你有帮助，可以赞赏作者，支持开源。
-
-<img width="320" src="https://xpoet.cn/images/admire-code-wechat.webp" />
-
-## 许可 | License
-
-**[AGPL-3.0](https://github.com/XPoet/picx/blob/master/LICENSE)** 
-
-Copyright © 2020-Present XPoet
