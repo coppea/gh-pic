@@ -1,0 +1,56 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/dist
+/dist-ssr
+/tmp
+/out-tsc
+
+# dependencies
+/node_modules
+yarn.lock
+package-lock.json
+.pnpm-store
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+# !.vscode/settings.json
+# !.vscode/tasks.json
+# !.vscode/launch.json
+# !.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+/e2e/src/*.js
+/e2e/src/*.map
+/cypress/screenshots
+/playwright-report
+/test-results
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Other
+*.local
+
+# WorkBuddy 本地产物
+/.workbuddy/
+*.genie
