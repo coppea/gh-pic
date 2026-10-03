@@ -39,7 +39,6 @@
     "management": "圖床管理",
     "settings": "圖床設定",
     "toolbox": "工具箱",
-    "feedback": "幫助回饋",
     "actions": "快速操作"
   },
   "actions": {
@@ -131,8 +130,7 @@
       "error_msg_2": "{action}失敗，圖片連結規則必須包含 {path}",
       "error_msg_3": "圖片連結規則缺少 {rules}，是否確認{action}？",
       "add": "新增",
-      "edit": "編輯",
-      "gh_pages_not_deployed": "圖床儲存庫尚未部署 GitHub Pages，暫不能選擇此圖片連結規則，是否立即一鍵部署？"
+      "edit": "編輯"
     },
     "link_format": {
       "title": "圖片連結格式設定",
@@ -140,24 +138,6 @@
       "switch_desc": "上傳成功後複製的圖片連結會自動轉換成 {type} 格式",
       "select_title": "選擇圖片連結格式",
       "delete_tips": "此動作將永久刪除圖片連結規則"
-    },
-    "image_hosting_deploy": {
-      "title": "圖床部署",
-      "one_click_deploy": "一鍵部署",
-      "deploy_to": "部署到 {server}",
-      "success": "部署成功",
-      "fail": "部署失敗",
-      "fail2": "部署失敗，請稍後再試",
-      "deploying": "正在部署到 GitHub Pages，該過程持續 1 分鐘左右，請耐心等待 ...",
-      "not_deployed": "未部署",
-      "custom_domain_label": "自訂網域",
-      "custom_domain_placeholder": "例如 img.example.com",
-      "custom_domain_desc": "儲存後會在儲存庫根目錄建立 CNAME 檔案並自動部署到 GitHub Pages，還需在 DNS 服務商處新增 CNAME 記錄指向 {pagesDomain}",
-      "custom_domain_save": "儲存",
-      "custom_domain_invalid": "網域格式不正確，請輸入如 img.example.com 的網域",
-      "custom_domain_synced": "CNAME 檔案已同步，自訂網域將在 GitHub Pages 重新部署後生效",
-      "custom_domain_deleted": "已清除自訂網域，CNAME 檔案已刪除",
-      "custom_domain_fail": "CNAME 檔案同步失敗，請稍後再試"
     },
     "theme": {
       "title": "主題設定",
@@ -213,7 +193,8 @@
     "contextmenu_3": "根目錄",
     "contextmenu_4": "跳轉 GitHub 倉庫",
     "text_1": "請輸入新的圖片名稱",
-    "text_2": "立即上傳"
+    "text_2": "立即上傳",
+    "img_unavailable": "連結無法存取"
   },
   "toolbox": {
     "tool_1": "圖片壓縮",
@@ -228,12 +209,6 @@
     "compress": "壓縮",
     "batch_download": "批次下載",
     "add_watermark": "新增浮水印"
-  },
-  "feedback": {
-    "text_1": "PicX 是一款基於 GitHub API 開發的圖床工具，提供圖片上傳託管、產生圖片連結和常用圖片工具箱服務。",
-    "text_2": "建議將本站新增至瀏覽器收藏夾，方便下次使用。",
-    "text_3": "如果 PicX 對你有幫助，歡迎讚賞作者，支持開源。",
-    "text_4": "鄭重聲明：請勿使用 PicX 上傳違反你當地法律的圖片，所造成的一切後果與作者無關。"
   },
   "region": {
     "CN": "中國大陸",

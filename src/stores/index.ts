@@ -61,9 +61,6 @@ export const store = {
     get getUploadImageList() {
       return picxStore.getUploadImageList
     },
-    get getDeployStatusInfo() {
-      return picxStore.getDeployStatusInfo
-    },
   },
   state: {
     get dirImageListModule() {
@@ -89,9 +86,6 @@ export const store = {
     },
     get githubAuthorizeModule() {
       return picxStore.githubAuthorizeModule
-    },
-    get deployStatusModule() {
-      return picxStore.deployStatusModule
     },
   },
   dispatch(type: string, payload?: unknown): Promise<unknown> {

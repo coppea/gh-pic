@@ -1,4 +1,3 @@
-import type DeployStatusStateTypes from './modules/deploy-status/types'
 import type DirImageListStateTypes from './modules/dir-image-list/types'
 import type GitHubAuthorizeStateTypes from './modules/github-authorize/types'
 import type ToolboxImageListStateTypes from './modules/toolbox-image-list/types'
@@ -17,5 +16,4 @@ export interface AllStateTypes extends RootStateTypes {
   toolboxImageListModule: ToolboxImageListStateTypes
   uploadImageListModule: UploadImageListStateTypes
   githubAuthorizeModule: GitHubAuthorizeStateTypes
-  deployStatusModule: DeployStatusStateTypes
 }

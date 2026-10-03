@@ -27,37 +27,19 @@ const initSettings: UserSettingsModel = {
     encoder: CompressEncoderEnum.webP,
   },
   imageLinkType: {
-    selected: ImageLinkTypeEnum.GitHub,
+    selected: ImageLinkTypeEnum.Cachefly,
     presetList: {
-      // GitHubPages
-      [`${ImageLinkTypeEnum.GitHubPages}`]: {
+      // Cachefly
+      [`${ImageLinkTypeEnum.Cachefly}`]: {
         id: getUuid(),
-        name: ImageLinkTypeEnum.GitHubPages,
-        rule: 'https://{{owner}}.github.io/{{repo}}/{{path}}',
+        name: ImageLinkTypeEnum.Cachefly,
+        rule: 'https://888899.best/{{path}}',
       },
-      // GitHub
-      [`${ImageLinkTypeEnum.GitHub}`]: {
+      // EdgeOne
+      [`${ImageLinkTypeEnum.EdgeOne}`]: {
         id: getUuid(),
-        name: ImageLinkTypeEnum.GitHub,
-        rule: 'https://github.com/{{owner}}/{{repo}}/raw/{{branch}}/{{path}}',
-      },
-      // jsDelivr
-      [`${ImageLinkTypeEnum.jsDelivr}`]: {
-        id: getUuid(),
-        name: ImageLinkTypeEnum.jsDelivr,
-        rule: 'https://cdn.jsdelivr.net/gh/{{owner}}/{{repo}}@{{branch}}/{{path}}',
-      },
-      // Statically
-      [`${ImageLinkTypeEnum.Statically}`]: {
-        id: getUuid(),
-        name: ImageLinkTypeEnum.Statically,
-        rule: 'https://cdn.statically.io/gh/{{owner}}/{{repo}}@{{branch}}/{{path}}',
-      },
-      // ChinaJsDelivr
-      [`${ImageLinkTypeEnum.ChinaJsDelivr}`]: {
-        id: getUuid(),
-        name: ImageLinkTypeEnum.ChinaJsDelivr,
-        rule: 'https://jsd.cdn.zzko.cn/gh/{{owner}}/{{repo}}@{{branch}}/{{path}}',
+        name: ImageLinkTypeEnum.EdgeOne,
+        rule: 'https://pic.o9o.cn/{{path}}',
       },
     },
   },
@@ -78,9 +60,6 @@ const initSettings: UserSettingsModel = {
         format: '[img]imageLink[/img]',
       },
     ],
-  },
-  deploy: {
-    customDomain: '',
   },
   starred: false,
   watermark: {

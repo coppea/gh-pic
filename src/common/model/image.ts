@@ -123,13 +123,7 @@ export interface ImageLinkFormatModel {
  * 图片链接类型名称枚举
  */
 export enum ImageLinkTypeEnum {
-  GitHub = 'GitHub',
+  Cachefly = 'Cachefly',
 
-  GitHubPages = 'GitHub Pages',
-
-  jsDelivr = 'jsDelivr',
-
-  ChinaJsDelivr = 'ChinaJsDelivr',
-
-  Statically = 'Statically',
+  EdgeOne = 'EdgeOne',
 }

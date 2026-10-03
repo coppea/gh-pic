@@ -44,8 +44,9 @@ export const generateUploadImageObject = (obj: {
   tmp.filename.prefix = imageName.addPrefix.prefix
   tmp.filename.hash = hash
   tmp.filename.suffix = suffix
+  // 启用哈希化时，文件名仅使用哈希值本身，不拼接原始文件名，且哈希值前不带点
   tmp.filename.final = imageName.enableHash
-    ? `${tmp.filename.name}.${hash}.${suffix}`
+    ? `${hash}.${suffix}`
     : `${tmp.filename.name}.${suffix}`
   tmp.filename.isAddHash = imageName.enableHash
   tmp.filename.isAddPrefix = imageName.addPrefix.enable

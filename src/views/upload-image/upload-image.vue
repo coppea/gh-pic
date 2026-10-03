@@ -23,8 +23,6 @@ const uploadImageList = ref<UploadImageModel[]>([])
 const uploading = ref(false)
 const shortcutKey = computed(() => (getOSName() === 'mac' ? '⌘' : 'Ctrl'))
 
-const isCanDeploy = ref(false)
-
 const setImgList = (imgList: any[]) => {
   imgList.forEach((v) => {
     store.dispatch('UPLOAD_IMG_LIST_ADD', generateUploadImageObject(v))
@@ -129,7 +127,6 @@ const uploadImage = async () => {
 // 重置
 const resetUploadInfo = () => {
   uploading.value = false
-  isCanDeploy.value = false
   store.dispatch('UPLOAD_IMG_LIST_RESET')
   resetGettingImages()
 }
@@ -153,7 +150,6 @@ watch(
   () => store.state.uploadImageListModule.uploadImageList,
   (nv) => {
     uploadImageList.value = nv
-    isCanDeploy.value = uploadImageList.value.some(x => x.uploadStatus.progress === 100)
   },
   {
     immediate: true,
@@ -221,13 +217,6 @@ onMounted(() => {
             /
             {{ uploadImageList.length }}
           </span>
-        </div>
-      </div>
-
-      <!-- 部署 -->
-      <div v-if="userConfigInfo.logined" class="row-item">
-        <div class="content-box">
-          <deploy-status-bar :disabled="!isCanDeploy" />
         </div>
       </div>
 

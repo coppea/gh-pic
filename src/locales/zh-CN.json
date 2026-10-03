@@ -39,7 +39,6 @@
     "management": "图床管理",
     "settings": "图床设置",
     "toolbox": "工具箱",
-    "feedback": "帮助反馈",
     "actions": "快捷操作"
   },
   "actions": {
@@ -131,8 +130,7 @@
       "error_msg_2": "{action}失败，图片链接规则必须包含 {path}",
       "error_msg_3": "图片链接规则缺少 {rules}，是否确认{action}？",
       "add": "添加",
-      "edit": "编辑",
-      "gh_pages_not_deployed": "图床仓库尚未部署 GitHub Pages，暂不能选择此图片链接规则，是否立即一键部署？"
+      "edit": "编辑"
     },
     "link_format": {
       "title": "图片链接格式设置",
@@ -140,24 +138,6 @@
       "switch_desc": "上传成功后复制的图片链接自动转换成 {type} 格式",
       "select_title": "选择图片链接格式",
       "delete_tips": "此操作将永久删除图片链接规则"
-    },
-    "image_hosting_deploy": {
-      "title": "图床部署",
-      "one_click_deploy": "一键部署",
-      "deploy_to": "部署到 {server}",
-      "success": "部署成功",
-      "fail": "部署失败",
-      "fail2": "部署失败，请稍后再试",
-      "deploying": "正在部署到 GitHub Pages，该过程持续 1 分钟左右，请耐心等待 ...",
-      "not_deployed": "未部署",
-      "custom_domain_label": "自定义域名",
-      "custom_domain_placeholder": "例如 img.example.com",
-      "custom_domain_desc": "保存后会在仓库根目录创建 CNAME 文件并自动部署到 GitHub Pages，还需在 DNS 服务商处添加 CNAME 记录指向 {pagesDomain}",
-      "custom_domain_save": "保存",
-      "custom_domain_invalid": "域名格式不正确，请输入如 img.example.com 的域名",
-      "custom_domain_synced": "CNAME 文件已同步，自定义域名将在 GitHub Pages 重新部署后生效",
-      "custom_domain_deleted": "已清除自定义域名，CNAME 文件已删除",
-      "custom_domain_fail": "CNAME 文件同步失败，请稍后再试"
     },
     "theme": {
       "title": "主题设置",
@@ -213,7 +193,8 @@
     "contextmenu_3": "根目录",
     "contextmenu_4": "跳转 GitHub 仓库",
     "text_1": "请输入新的图片名称",
-    "text_2": "立即上传"
+    "text_2": "立即上传",
+    "img_unavailable": "链接不可访问"
   },
   "toolbox": {
     "tool_1": "图片压缩",
@@ -228,12 +209,6 @@
     "compress": "压缩",
     "batch_download": "批量下载",
     "add_watermark": "添加水印"
-  },
-  "feedback": {
-    "text_1": "PicX 是一款基于 GitHub API 开发的图床工具，提供图片上传托管、生成图片链接和常用图片工具箱服务。",
-    "text_2": "建议将本站添加到浏览器收藏夹，方便下次使用。",
-    "text_3": "如果 PicX 对你有帮助，欢迎赞赏作者，支持开源。",
-    "text_4": "郑重声明：请勿使用 PicX 上传违反你当地法律的图片，所造成的一切后果与作者无关。"
   },
   "region": {
     "CN": "中国大陆",

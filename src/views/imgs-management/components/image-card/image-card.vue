@@ -2,7 +2,6 @@
 import type { UploadedImageModel } from '@/common/model'
 import { computed, ref } from 'vue'
 import { ContextmenuEnum } from '@/common/directive/types'
-import { ImageLinkTypeEnum } from '@/common/model'
 import { store } from '@/stores'
 import { copyImageLink, generateImageLink } from '@/utils'
 
@@ -17,15 +16,10 @@ const props = defineProps({
   },
 })
 
-const userSettings = computed(() => store.getters.getUserSettings).value
 const imgUrl = computed(() => generateImageLink(props.imageObj) ?? undefined)
 
-const noneDeployed = computed(() => {
-  return (
-    userSettings.imageLinkType.selected === ImageLinkTypeEnum.GitHubPages
-    && props.imageObj.deployed === false
-  )
-})
+// 图片链接不可访问（分发渠道尚未生效）时禁用复制链接并给出提示
+const imgUnavailable = computed(() => props.imageObj.deployed === false)
 
 const isShowOperateBtn = ref<boolean>(false)
 
@@ -38,7 +32,7 @@ const onShiftClick = (imageObj: UploadedImageModel) => {
   togglePick(imageObj)
 }
 
-const setDeployStatus = (status: boolean) => {
+const setImgAvailableStatus = (status: boolean) => {
   // eslint-disable-next-line vue/no-mutating-props
   props.imageObj.deployed = status
 }
@@ -66,8 +60,8 @@ const setDeployStatus = (status: boolean) => {
         :preview-src-list="
           store.getters.getUploadAreaState.pressShiftKey || !imgUrl ? [] : [imgUrl]
         "
-        @error="setDeployStatus(false)"
-        @load="setDeployStatus(true)"
+        @error="setImgAvailableStatus(false)"
+        @load="setImgAvailableStatus(true)"
       />
     </div>
 
@@ -81,7 +75,7 @@ const setDeployStatus = (status: boolean) => {
       <!-- 复制图片链接 -->
       <div
         class="copy-link text-ellipsis border-box"
-        :class="{ disabled: noneDeployed }"
+        :class="{ disabled: imgUnavailable }"
         @click="copyImageLink(imageObj)"
       >
         {{ $t('copy_link') }}
@@ -99,10 +93,10 @@ const setDeployStatus = (status: boolean) => {
       </el-icon>
     </div>
 
-    <!-- 部署状态 -->
-    <div v-if="noneDeployed" class="deploy-status-box">
+    <!-- 图片链接不可访问状态 -->
+    <div v-if="imgUnavailable" class="img-status-box">
       <el-tag type="danger" disable-transitions>
-        {{ $t('settings_page.image_hosting_deploy.not_deployed') }}
+        {{ $t('management_page.img_unavailable') }}
       </el-tag>
     </div>
   </div>

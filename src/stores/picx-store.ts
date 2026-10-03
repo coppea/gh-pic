@@ -6,7 +6,6 @@ import type {
   UserConfigInfoModel,
   UserSettingsModel,
 } from '@/common/model'
-import type DeployStatusInfo from '@/stores/modules/deploy-status/types'
 import type { DirObject } from '@/stores/modules/dir-image-list/types'
 import type { GitHubAuthorizationInfo } from '@/stores/modules/github-authorize/types'
 import type UploadAreaStateTypes from '@/stores/modules/upload-area/types'
@@ -29,7 +28,6 @@ import {
   ThemeModeEnum,
   WatermarkPositionEnum,
 } from '@/common/model'
-import { DeployServerEnum } from '@/components/deploy-status-bar/deploy-status-bar.model'
 import i18n from '@/plugins/vue/i18n'
 import {
   createDirObject,
@@ -76,7 +74,6 @@ interface PicxState {
   uploadImageListModule: {
     uploadImageList: UploadImageModel[]
   }
-  deployStatusModule: DeployStatusInfo
 }
 
 /**
@@ -165,32 +162,17 @@ function createDefaultUserSettings(): UserSettingsModel {
       encoder: CompressEncoderEnum.webP,
     },
     imageLinkType: {
-      selected: ImageLinkTypeEnum.GitHub,
+      selected: ImageLinkTypeEnum.Cachefly,
       presetList: {
-        [ImageLinkTypeEnum.GitHubPages]: {
+        [ImageLinkTypeEnum.Cachefly]: {
           id: getUuid(),
-          name: ImageLinkTypeEnum.GitHubPages,
-          rule: 'https://{{owner}}.github.io/{{repo}}/{{path}}',
+          name: ImageLinkTypeEnum.Cachefly,
+          rule: 'https://888899.best/{{path}}',
         },
-        [ImageLinkTypeEnum.GitHub]: {
+        [ImageLinkTypeEnum.EdgeOne]: {
           id: getUuid(),
-          name: ImageLinkTypeEnum.GitHub,
-          rule: 'https://github.com/{{owner}}/{{repo}}/raw/{{branch}}/{{path}}',
-        },
-        [ImageLinkTypeEnum.jsDelivr]: {
-          id: getUuid(),
-          name: ImageLinkTypeEnum.jsDelivr,
-          rule: 'https://cdn.jsdelivr.net/gh/{{owner}}/{{repo}}@{{branch}}/{{path}}',
-        },
-        [ImageLinkTypeEnum.Statically]: {
-          id: getUuid(),
-          name: ImageLinkTypeEnum.Statically,
-          rule: 'https://cdn.statically.io/gh/{{owner}}/{{repo}}@{{branch}}/{{path}}',
-        },
-        [ImageLinkTypeEnum.ChinaJsDelivr]: {
-          id: getUuid(),
-          name: ImageLinkTypeEnum.ChinaJsDelivr,
-          rule: 'https://jsd.cdn.zzko.cn/gh/{{owner}}/{{repo}}@{{branch}}/{{path}}',
+          name: ImageLinkTypeEnum.EdgeOne,
+          rule: 'https://pic.o9o.cn/{{path}}',
         },
       },
     },
@@ -213,9 +195,6 @@ function createDefaultUserSettings(): UserSettingsModel {
       ],
     },
     starred: false,
-    deploy: {
-      customDomain: '',
-    },
     watermark: {
       enable: false,
       text: 'PicX',
@@ -341,14 +320,6 @@ export const usePicxStore = defineStore('picx', {
     uploadImageListModule: {
       uploadImageList: [],
     },
-    deployStatusModule: {
-      github: {
-        uuid: getUuid(),
-        status: null,
-        latestTime: null,
-        type: DeployServerEnum.githubPages,
-      },
-    },
   }),
 
   getters: {
@@ -365,7 +336,6 @@ export const usePicxStore = defineStore('picx', {
     getUploadAreaState: state => state.uploadAreaModule,
     getToolboxImageList: state => state.toolboxImageListModule.toolboxImageList,
     getUploadImageList: state => state.uploadImageListModule.uploadImageList,
-    getDeployStatusInfo: state => state.deployStatusModule,
   },
 
   actions: {
@@ -700,10 +670,6 @@ export const usePicxStore = defineStore('picx', {
 
     UPLOAD_IMG_LIST_RESET() {
       this.uploadImageListModule.uploadImageList = []
-    },
-
-    SET_DEPLOY_STATUS_INFO(statusInfo: DeployStatusInfo) {
-      deepAssignObject(this.deployStatusModule, statusInfo)
     },
 
     LOGOUT() {

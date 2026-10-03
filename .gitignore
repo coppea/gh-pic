@@ -50,3 +50,7 @@ Thumbs.db
 
 # Other
 *.local
+
+# WorkBuddy 本地产物
+/.workbuddy/
+*.genie

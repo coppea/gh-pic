@@ -21,7 +21,7 @@ export const addPrefixHandle = (isAddPrefix: boolean, img: UploadImageModel) => 
     img.filename.name = `${img.filename.initName}`
   }
   if (img.filename.isAddHash) {
-    img.filename.final = `${img.filename.name}.${img.filename.hash}.${img.filename.suffix}`
+    img.filename.final = `${img.filename.hash}.${img.filename.suffix}`
   }
   else {
     img.filename.final = `${img.filename.name}.${img.filename.suffix}`
@@ -30,13 +30,14 @@ export const addPrefixHandle = (isAddPrefix: boolean, img: UploadImageModel) => 
 
 /**
  * 图片名称添加哈希值的处理
+ * 启用后文件名仅使用哈希值本身，不拼接原始文件名，且哈希值前不带点
  * @param isAddHash
  * @param img
  */
 export const addHashHandle = (isAddHash: boolean, img: UploadImageModel) => {
   img.filename.isAddHash = isAddHash
   if (isAddHash) {
-    img.filename.final = `${img.filename.name}.${img.filename.hash}.${img.filename.suffix}`
+    img.filename.final = `${img.filename.hash}.${img.filename.suffix}`
   }
   else {
     img.filename.final = `${img.filename.name}.${img.filename.suffix}`
@@ -59,7 +60,7 @@ export const rename = (isRename: boolean, img: UploadImageModel) => {
   }
 
   if (img.filename.isAddHash) {
-    img.filename.final = `${img.filename.name}.${img.filename.hash}.${img.filename.suffix}`
+    img.filename.final = `${img.filename.hash}.${img.filename.suffix}`
   }
   else {
     img.filename.final = `${img.filename.name}.${img.filename.suffix}`

@@ -69,14 +69,6 @@ const routes: Array<RouteRecordRaw> = [
     ],
   },
   {
-    path: '/feedback',
-    name: 'feedback',
-    component: () => import('@/views/feedback-info/feedback-info.vue'),
-    meta: {
-      title: 'nav.feedback',
-    },
-  },
-  {
     path: '/:catchAll(.*)',
     redirect: '/',
   },

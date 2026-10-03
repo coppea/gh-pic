@@ -44,7 +44,7 @@
 - [x] 支持 **[批量上传图片](https://picx-docs.xpoet.cn/usage-guide/upload.html)**、**[批量删除图片](https://picx-docs.xpoet.cn/usage-guide/management.html#%E6%89%B9%E9%87%8F%E5%88%A0%E9%99%A4%E5%A4%9A%E5%BC%A0%E5%9B%BE%E5%BA%8A)** 和 **[批量复制图片链接](https://picx-docs.xpoet.cn/usage-guide/management.html#%E6%89%B9%E9%87%8F%E5%A4%8D%E5%88%B6%E5%A4%9A%E5%BC%A0%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5)**
 - [x] 支持图床 **多级目录** 管理 （[创建多级目录](https://picx-docs.xpoet.cn/usage-guide/config.html#%E6%96%B0%E5%BB%BA%E5%A4%9A%E7%BA%A7%E7%9B%AE%E5%BD%95) / 查看多级目录下图片）
 - [x] 支持 **[一键复制](https://picx-docs.xpoet.cn/usage-guide/upload.html#%E5%A4%8D%E5%88%B6%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5)** 图片链接和 **[自由转换 Markdown / HTML / BBCode 格式](https://picx-docs.xpoet.cn/usage-guide/settings.html#%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E6%A0%BC%E5%BC%8F%E8%AE%BE%E7%BD%AE)**
-- [x] 内置 **[多种图片链接规则](https://picx-docs.xpoet.cn/usage-guide/settings.html#%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE)**（GitHub、GitHub Pages、jsDelivr、Statically 等）
+- [x] 内置 **[图片链接规则](https://picx-docs.xpoet.cn/usage-guide/settings.html#%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E8%A7%84%E5%88%99%E9%85%8D%E7%BD%AE)**（Cachefly、EdgeOne）
 - [x] 支持 **[自定义配置图片链接规则](https://picx-docs.xpoet.cn/usage-guide/settings.html#%E9%85%8D%E7%BD%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E8%A7%84%E5%88%99)**
 - [x] 支持 **[图片压缩](https://picx-docs.xpoet.cn/usage-guide/settings.html#%E5%9B%BE%E7%89%87%E5%8E%8B%E7%BC%A9%E8%AE%BE%E7%BD%AE)** (内置高效压缩算法，可配置在上传前自动压缩)
 - [x] 支持配置 **[图片水印](https://picx-docs.xpoet.cn/usage-guide/settings.html#%E5%9B%BE%E7%89%87%E6%B0%B4%E5%8D%B0%E8%AE%BE%E7%BD%AE)**
@@ -66,10 +66,6 @@
 <a href="https://github.com/XPoet/picx/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=XPoet/picx" />
 </a>
-
-## 反馈 | Feedback
-
-在使用过程中，如遇问题，请仔细阅读 **[官方文档](https://picx-docs.xpoet.cn)**，或在 GitHub 发起 **[Issue](https://github.com/XPoet/picx/issues)**。
 
 ## 赞赏 | Appreciation
 
