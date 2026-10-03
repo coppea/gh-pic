@@ -137,6 +137,10 @@ pnpm build
 pnpm lint
 pnpm lint:style
 pnpm format
+pnpm typecheck
+pnpm test
+pnpm test:e2e
+pnpm verify
 ```
 
-当前项目没有正式的 `typecheck`、单元测试或端到端测试脚本。未新增这些脚本前，不得声称相关检查已通过。
+`pnpm verify` 会执行 Lint、样式检查、类型检查、单元测试和生产构建；端到端测试通过 `pnpm test:e2e` 单独执行。只有实际运行并通过相应脚本后，才可声明对应检查已通过。

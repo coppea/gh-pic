@@ -80,6 +80,16 @@ export const uploadUrlHandle = (config: UserConfigInfoModel, imgObj: UploadImage
   return `/repos/${owner}/${repo}/contents/${path}`
 }
 
+const getUploadPath = (config: UserConfigInfoModel, img: UploadImageModel): string => {
+  if (img.reUploadInfo?.isReUpload) {
+    return img.reUploadInfo.path
+  }
+
+  return config.selectedDir === '/'
+    ? img.filename.final
+    : `${config.selectedDir}/${img.filename.final}`
+}
+
 /**
  * 上传多张图片到 GitHub 仓库
  * @param userConfigInfo
@@ -89,9 +99,10 @@ export async function uploadImagesToGitHub(
   userConfigInfo: UserConfigInfoModel,
   imgs: UploadImageModel[],
 ): Promise<boolean> {
-  const { branch, repo, selectedDir, owner } = userConfigInfo
+  const { branch, repo, owner } = userConfigInfo
 
-  const blobs = []
+  const blobs: Array<{ img: UploadImageModel, sha: string }> = []
+  const resetUploading = () => imgs.forEach(img => (img.uploadStatus.uploading = false))
 
   for (const img of imgs) {
     img.uploadStatus.uploading = true
@@ -106,54 +117,57 @@ export async function uploadImagesToGitHub(
       blobs.push({ img, ...blobRes })
     }
     else {
-      img.uploadStatus.uploading = false
+      resetUploading()
       ElMessage.error(i18n.global.t('upload_page.tip_11', { name: img.filename.final }))
+      return false
     }
   }
 
   // 获取 head，用于获取当前分支信息（根目录的 tree sha 以及 head commit sha）
   const branchRes: any = await getBranchInfo(owner, repo, branch)
   if (!branchRes) {
-    return Promise.resolve(false)
+    resetUploading()
+    return false
   }
-
-  const finalPath = selectedDir === '/' ? '' : `${selectedDir}/`
 
   // 创建 tree
   const treeRes = await createTree(
     owner,
     repo,
-    blobs.map((x: any) => ({
+    blobs.map(x => ({
       sha: x.sha,
-      path: `${finalPath}${x.img.filename.final}`,
+      path: getUploadPath(userConfigInfo, x.img),
     })),
     branchRes,
   )
   if (!treeRes) {
-    return Promise.resolve(false)
+    resetUploading()
+    return false
   }
 
   // 创建 commit 节点
   const commitRes: any = await createCommit(owner, repo, treeRes, branchRes)
   if (!commitRes) {
-    return Promise.resolve(false)
+    resetUploading()
+    return false
   }
 
   // 将当前分支 ref 指向新创建的 commit
   const refRes = await createRef(owner, repo, branch, commitRes.sha)
   if (!refRes) {
-    return Promise.resolve(false)
+    resetUploading()
+    return false
   }
 
-  blobs.forEach((blob: any) => {
+  blobs.forEach((blob) => {
     const name = blob.img.filename.final
     uploadedHandle(
-      { name, sha: blob.sha, path: `${finalPath}${name}`, size: 0 },
+      { name, sha: blob.sha, path: getUploadPath(userConfigInfo, blob.img), size: 0 },
       blob.img,
       userConfigInfo,
     )
   })
-  return Promise.resolve(true)
+  return true
 }
 
 /**

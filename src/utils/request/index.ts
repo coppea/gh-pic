@@ -21,7 +21,7 @@ export default function request(requestConfig: CustomAxiosRequestConfig): Promis
       .then((res) => {
         const { status, data } = res
         if (res && (status === 200 || status === 201 || status === 204)) {
-          resolve(data || 'SUCCESS')
+          resolve(data ?? 'SUCCESS')
         }
         else {
           resolve(null)
@@ -29,7 +29,7 @@ export default function request(requestConfig: CustomAxiosRequestConfig): Promis
       })
       .catch((err) => {
         if (success422 && err?.status === 422) {
-          resolve(err?.data || 'SUCCESS')
+          resolve(err?.data ?? 'SUCCESS')
         }
         else {
           const code = err?.status

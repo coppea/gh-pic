@@ -17,6 +17,8 @@ import {
   LS_MANAGEMENT,
   LS_SETTINGS,
   NEW_DIR_COUNT_MAX,
+  SS_AUTHORIZATION_SECRETS,
+  SS_CONFIG_TOKEN,
   SS_GLOBAL_SETTINGS,
 } from '@/common/constant'
 import {
@@ -106,9 +108,30 @@ function createAuthorizationInfo(): GitHubAuthorizationInfo {
   const storedAuthorizationInfo = getLocal(
     LS_AUTHORIZATION,
   ) as Partial<GitHubAuthorizationInfo> | null
+  const storedAuthorizationSecrets = getSession(
+    SS_AUTHORIZATION_SECRETS,
+  ) as Pick<GitHubAuthorizationInfo, 'token' | 'code' | 'manualToken'> | null
+
+  if (
+    storedAuthorizationInfo?.token
+    || storedAuthorizationInfo?.code
+    || storedAuthorizationInfo?.manualToken
+  ) {
+    const { token, code, manualToken, ...publicAuthorizationInfo } = storedAuthorizationInfo
+
+    setLocal(LS_AUTHORIZATION, publicAuthorizationInfo)
+    setSession(SS_AUTHORIZATION_SECRETS, {
+      token: storedAuthorizationSecrets?.token ?? token,
+      code: storedAuthorizationSecrets?.code ?? code,
+      manualToken: storedAuthorizationSecrets?.manualToken ?? manualToken,
+    })
+  }
 
   if (storedAuthorizationInfo) {
     deepAssignObject(authorizationInfo, storedAuthorizationInfo)
+  }
+  if (storedAuthorizationSecrets) {
+    deepAssignObject(authorizationInfo, storedAuthorizationSecrets)
   }
 
   return authorizationInfo
@@ -135,14 +158,26 @@ function createUserConfigInfo(): UserConfigInfoModel {
     viewDir: '',
     repoPrivate: false,
   }
-  const storedConfig = localStorage.getItem(LS_CONFIG)
+  const storedConfig = getLocal(LS_CONFIG) as Partial<UserConfigInfoModel> | null
+  const storedToken = getSession(SS_CONFIG_TOKEN) as string | null
+
+  if (storedConfig?.token) {
+    const { token, ...publicConfig } = storedConfig
+
+    setLocal(LS_CONFIG, publicConfig)
+    if (!storedToken)
+      setSession(SS_CONFIG_TOKEN, token)
+  }
 
   if (storedConfig) {
-    deepAssignObject(userConfigInfo, JSON.parse(storedConfig) as Partial<UserConfigInfoModel>)
+    deepAssignObject(userConfigInfo, storedConfig)
 
     if (userConfigInfo.dirMode === DirModeEnum.dateDir) {
       userConfigInfo.selectedDir = formatDatetime('yyyyMMdd')
     }
+  }
+  if (storedToken) {
+    userConfigInfo.token = storedToken
   }
 
   return userConfigInfo
@@ -345,7 +380,9 @@ export const usePicxStore = defineStore('picx', {
     },
 
     GITHUB_AUTHORIZATION_INFO_PERSIST() {
-      setLocal(LS_AUTHORIZATION, this.githubAuthorizeModule.authorizationInfo)
+      const { token, code, manualToken, ...authorizationInfo } = this.githubAuthorizeModule.authorizationInfo
+      setLocal(LS_AUTHORIZATION, authorizationInfo)
+      setSession(SS_AUTHORIZATION_SECRETS, { token, code, manualToken })
     },
 
     USER_CONFIG_INFO_RESET() {
@@ -378,11 +415,15 @@ export const usePicxStore = defineStore('picx', {
 
     USER_CONFIG_INFO_PERSIST() {
       normalizeUserConfigInfo(this.userConfigInfoModule.userConfigInfo)
-      localStorage.setItem(LS_CONFIG, JSON.stringify(this.userConfigInfoModule.userConfigInfo))
+      const { token, ...configInfo } = this.userConfigInfoModule.userConfigInfo
+      setLocal(LS_CONFIG, configInfo)
+      setSession(SS_CONFIG_TOKEN, token)
     },
 
     USER_CONFIG_INFO_LOGOUT() {
       cleanObject(this.userConfigInfoModule.userConfigInfo)
+      localStorage.removeItem(LS_CONFIG)
+      sessionStorage.removeItem(SS_CONFIG_TOKEN)
     },
 
     SET_USER_SETTINGS(settingsInfo: Partial<UserSettingsModel>) {

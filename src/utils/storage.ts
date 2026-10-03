@@ -4,7 +4,17 @@
  */
 export const getLocal = (key: string) => {
   const temp = window.localStorage.getItem(key)
-  return temp ? JSON.parse(temp) : null
+  if (!temp) {
+    return null
+  }
+
+  try {
+    return JSON.parse(temp)
+  }
+  catch {
+    window.localStorage.removeItem(key)
+    return null
+  }
 }
 
 /**
@@ -22,7 +32,17 @@ export const setLocal = (key: string, value: any) => {
  */
 export const getSession = (key: string) => {
   const temp = window.sessionStorage.getItem(key)
-  return temp ? JSON.parse(temp) : null
+  if (!temp) {
+    return null
+  }
+
+  try {
+    return JSON.parse(temp)
+  }
+  catch {
+    window.sessionStorage.removeItem(key)
+    return null
+  }
 }
 
 /**
